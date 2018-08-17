@@ -1,6 +1,6 @@
 # SEAN Real Estate Listing Application
 
-One Paragraph of project description goes here. Link to the live version of the app if it's hosted on Heroku.
+The fourth weekend assignment for Prime Digital Academy was to create a real estate listing application using the SEAN stack.
 
 ## Built With
 

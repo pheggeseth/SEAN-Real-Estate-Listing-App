@@ -17,19 +17,28 @@ const router = express.Router();
 // const Model = mongoose.model('modelName', modelSchema);
 
 // POSTGRESQL SETUP
-// const pg = require('pg');
-// const Pool = pg.Pool;
-// const config = {
-//   database: 'name', // name of database
-//   host: 'localhost',
-//   port: 5432,
-//   max: 10, // max number of concurrent connections
-//   idleTimeoutMillis: 10000 // attepmt to connect for 10 seconds
-// };
+// Database: "real_estate"
+// CREATE TABLE "listings" (
+// 	"id" serial primary key,
+// 	"cost" int,
+// 	"sqft" int,
+// 	"type" varchar(20),
+// 	"city" varchar(20),
+// 	"image_path" varchar(20)
+// );
+const pg = require('pg');
+const Pool = pg.Pool;
+const config = {
+  database: 'real_estate', // name of database
+  host: 'localhost',
+  port: 5432,
+  max: 10, // max number of concurrent connections
+  idleTimeoutMillis: 10000 // attepmt to connect for 10 seconds
+};
 
-// const pool = new Pool(config);
-// pool.on('connect', () => console.log('postgresql connected!!!'));
-// pool.on('error', error => console.log('Error connecting to db', error));
+const pool = new Pool(config);
+pool.on('connect', () => console.log('postgresql connected!!!'));
+pool.on('error', error => console.log('Error connecting to db', error));
 
 
 // get route params with "/route/:paramName, then reference it as req.params.paramName"
