@@ -1,0 +1,27 @@
+.card {
+  height: 200px;
+  width: 175px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.listing-info {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+.listing-city, .listing-stats {
+  flex-basis: 100%;
+  text-align: center;
+}

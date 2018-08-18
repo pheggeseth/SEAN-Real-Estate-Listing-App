@@ -20,15 +20,15 @@ app.config(function($routeProvider) {
     templateUrl: 'views/home.html',
     controller: 'HomeController as hc'
   }).when('/listings/rent', {
-    templateUrl: 'views/properties.html',
+    templateUrl: 'views/listings.html',
     controller: 'ListingsController as lc'
   }).when('/listings/sale', {
-    templateUrl: 'views/properties.html',
+    templateUrl: 'views/listings.html',
     controller: 'ListingsController as lc'
-  }).otherwise({
-    templateUrl: 'views/home.html',
-    controller: 'HomeController as hc'
-  });
+  })//.otherwise({
+  //   templateUrl: 'views/home.html',
+  //   controller: 'HomeController as hc'
+  // });
 });
 
 app.controller('HomeController', function($http) {
