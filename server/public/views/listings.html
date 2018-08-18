@@ -7,7 +7,7 @@
           <span class="listing-cost">{{listing.cost | currency:"$":0}}</span>
           <span class="listing-sqft">, {{listing.sqft}} sqft</span>
         </div>
-        <button class="listing-delete">Delete</button>
+        <button class="listing-delete" ng-click="lc.deleteListing(listing.id)">Delete</button>
       </div>
     </div>
 </div>

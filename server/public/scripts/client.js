@@ -56,30 +56,33 @@ app.controller('HomeController', function($http) {
 
 app.controller('ListingsController', function($http, $location) {
   const url = $location.url(); // url is always '/listings/rent' or '/listings/sale'
-  console.log('in ListingsController', url);
+  //console.log('in ListingsController', url);
   vm = this;
 
-  vm.listings = [
-    {
-      cost: 10000,
-      sqft: 1000
-    },
-    {
-      cost: 20000,
-      sqft: 2000
-    }
-  ];
+  vm.listings = [];
 
-  vm.getListings = function(){
-    console.log('in getListings:', url);
+  vm.deleteListing = function(id){
+    console.log('/listings DELETE request:', id);
+    $http({
+      method: 'DELETE',
+      url: '/listings/' + id
+    }).then(response => {
+      console.log('/listings DELETE success:', response);
+      getListings();
+    })
+    .catch(error => console.log('/listings DELETE error:', error));
+  };
+
+  function getListings(){
+    //console.log('in getListings:', url);
     $http({
       method: 'GET',
       url: url
     }).then(response => {
-      console.log('getListings success');
+      //console.log('getListings success');
       vm.listings = response.data;
     }).catch(error => console.log('getListings error:', error));
-  }
+  };
 
-  vm.getListings();
+  getListings();
 });
