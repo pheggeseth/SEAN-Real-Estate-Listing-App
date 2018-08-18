@@ -12,3 +12,10 @@ in separate terminal window, start database
 > brew services start postgresql for PostgreSQL
 */
 console.log('JS');
+
+const app = angular.module('app', ['ngRoute']);
+
+app.controller('HomeController', function($http) {
+  console.log('angularjs');
+  
+});

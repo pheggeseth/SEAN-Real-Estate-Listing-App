@@ -26,16 +26,21 @@ Include one or two screen shots of your project here (optional). Remove if unuse
 
 ### Completed Features
 
-High level list of items completed.
 
-- [x] Feature a
-- [x] Feature b
 
 ### Next Steps
 
-Features that you would like to add at some point in the future.
-
-- [ ] Feature c
+- [ ] create angular app
+- [ ] two views, one for sale, one for rent
+  - [ ] nav links to switch between them
+- [ ] three views/controllers
+  - [ ] Home view, allow user to add property
+    - [ ] create add property form
+      - [ ] radio button for sale/rental
+      - [ ] select for image names
+  - [ ] Rental/Sale views
+    - [ ] display listings as "cards" with information on them
+      - [ ] each card has a delete button
 
 ## Authors
 
