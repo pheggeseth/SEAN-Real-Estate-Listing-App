@@ -1,11 +1,13 @@
-<div class="card" ng-repeat="listing in lc.listings">
-  <img ng-src="/images/{{listing.image_path}}" alt="">
-  <div class="listing-info">
-    <div class="listing-city">{{listing.city}}</div>
-    <div class="listing-stats">
-      <span class="listing-cost">{{listing.cost | currency:"$":0}}</span>
-      <span class="listing-sqft">, {{listing.sqft}} sqft</span>
+<div class="cards-container">
+  <div class="card" ng-repeat="listing in lc.listings">
+      <img ng-src="/images/{{listing.image_path}}" alt="">
+      <div class="listing-info">
+        <div class="listing-city">{{listing.city}}</div>
+        <div class="listing-stats">
+          <span class="listing-cost">{{listing.cost | currency:"$":0}}</span>
+          <span class="listing-sqft">, {{listing.sqft}} sqft</span>
+        </div>
+        <button class="listing-delete">Delete</button>
+      </div>
     </div>
-    <button class="listing-delete">Delete</button>
-  </div>
 </div>

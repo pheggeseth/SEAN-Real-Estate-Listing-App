@@ -1,10 +1,35 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 750px 1fr;
+}
+.container {
+  grid-column: 2 / 3;
+  border: 1px solid;
+}
+.navbar {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.navbar a {
+  width: 150px;
+  text-align: center;
+}
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: minmax(200px, auto);
+}
 .card {
   height: 200px;
   width: 175px;
-  background-color: whitesmoke;
+  background-color: gainsboro;
   border-radius: 10px;
   padding: 10px;
-  margin: 10px;
+  margin: 10px auto;
+  float: left;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
