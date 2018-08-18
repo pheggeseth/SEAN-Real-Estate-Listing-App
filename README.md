@@ -31,7 +31,7 @@ Include one or two screen shots of your project here (optional). Remove if unuse
 ### Next Steps
 
 - [x] create angular app
-  - [ ] create routes
+  - [x] create routes
 - [ ] nav links to switch between them
 - [ ] three views/controllers
   - [ ] Home view, allow user to add property

@@ -1,21 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// MONGODB SETUP
-// const mongoose = require('mongoose');
-// const databaseName = '';
-// const mongoURI = `mongodb://localhost:27017/${databaseName}`; // 27017 is the PORT that Mongo is running on
-// mongoose.connect(mongoURI, {useNewUrlParser: true}); // {useNewUrlParser: true} <- avoids a warning in the console
-// mongoose.connection.on('open', () => console.log('Connected to Mongo'));
-// mongoose.connection.on('error', error => console.log('ERROR CONNECTING TO MONGO', error));
-
-// MONGODB SCHEMA AND MODEL
-// const Schema = mongoose.Schema;
-// const modelSchema = new Schema({
-//   property: {type: String, Number, etc.}
-// });
-// const Model = mongoose.model('modelName', modelSchema);
-
 // POSTGRESQL SETUP
 // Database: "real_estate"
 // CREATE TABLE "listings" (
@@ -26,6 +11,7 @@ const router = express.Router();
 // 	"city" varchar(20),
 // 	"image_path" varchar(20)
 // );
+
 const pg = require('pg');
 const Pool = pg.Pool;
 const config = {
@@ -42,20 +28,14 @@ pool.on('error', error => console.log('Error connecting to db', error));
 
 
 // get route params with "/route/:paramName, then reference it as req.params.paramName"
-router.get('/', (req, res) => {
-  // MONGODB SAMPLE GET
-  // model.find({}) // or something like model.find({amount: {$gt: something, $lt: something}})
-  //   .then(models => res.send(models))
-  //   .catch(error => res.sendStatus(500));
-  // const query = 'SELECT * FROM "table-name";';
-
-  // POSTGRESQL SAMPLE GET
-  // pool.query(query)
-  //   .then(results => res.send(results.rows))
-  //   .catch(error => {
-  //     console.log('DB Query Error:', error);
-  //     res.sendStatus(500);
-  //   });
+router.get('/:type', (req, res) => {
+  const query = `SELECT * FROM "listings" WHERE "type" = $1;`;
+  pool.query(query, [req.params.type])
+    .then(results => res.send(results.rows))
+    .catch(error => {
+      console.log('DB Query Error:', error);
+      res.sendStatus(500);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -76,29 +56,6 @@ router.post('/', (req, res) => {
   //       console.log('Error in POST:', error);
   //       res.sendStatus(500);
   //   });
-});
-
-router.put('/:id', (req, res) => {
-  /* 
-  Model.findOne({_id: req.params.id})
-    .then(foundModel => {
-      //alter model then save in database
-    }).catch(error => res.sendStatus(500));
-  */
-
-  // POSTGRESQL SAMPLE PUT
-  //  const updatedShoe = req.body;
-  //  const queryText = `UPDATE "shoes" 
-  //                     SET "name" = $1, "cost" = $2, "size" = $3
-  //                     WHERE "id" = $4;`;
-  //  pool.query(queryText, [updatedShoe.name,
-  //                         updatedShoe.cost, 
-  //                         updatedShoe.size, 
-  //                         updatedShoe.id]).then( (result) => {
-  //                             res.sendStatus(200);
-  //                         }).catch( (error) => {
-  //                             res.sendStatus(500);
-  //                         });
 });
 
 router.delete('/:id', (req, res) => {
