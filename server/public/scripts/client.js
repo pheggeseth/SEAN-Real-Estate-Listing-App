@@ -19,12 +19,12 @@ app.config(function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'views/home.html',
     controller: 'HomeController as hc'
-  }).when('/rental', {
+  }).when('/listings/rent', {
     templateUrl: 'views/properties.html',
-    controller: 'PropertyController as pc'
-  }).when('/sale', {
+    controller: 'ListingsController as lc'
+  }).when('/listings/sale', {
     templateUrl: 'views/properties.html',
-    controller: 'PropertyController as pc'
+    controller: 'ListingsController as lc'
   }).otherwise({
     templateUrl: 'views/home.html',
     controller: 'HomeController as hc'
@@ -36,11 +36,12 @@ app.controller('HomeController', function($http) {
   
 });
 
-app.controller('PropertyController', function($http, $location) {
-  console.log('in PropertyController', $location.url());
+app.controller('ListingsController', function($http, $location) {
+  const url = $location.url(); // url is always '/listings/rent' or '/listings/sale'
+  console.log('in ListingsController', url);
   vm = this;
 
-  vm.properties = [
+  vm.listings = [
     {
       cost: 10000,
       sqft: 1000
@@ -51,10 +52,16 @@ app.controller('PropertyController', function($http, $location) {
     }
   ];
 
-  vm.getProperties = function(){
-    console.log('getProperties:', $location.url());
-    
+  vm.getListings = function(){
+    console.log('in getListings:', url);
+    $http({
+      method: 'GET',
+      url: url
+    }).then(response => {
+      console.log('getListings success:', response.data);
+      vm.listings = response.data;
+    }).catch(error => console.log('getListings error:', error));
   }
 
-  vm.getProperties();
+  vm.getListings();
 });
