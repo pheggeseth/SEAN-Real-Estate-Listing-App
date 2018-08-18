@@ -40,7 +40,16 @@ app.controller('PropertyController', function($http, $location) {
   console.log('in PropertyController', $location.url());
   vm = this;
 
-  vm.properties = [];
+  vm.properties = [
+    {
+      cost: 10000,
+      sqft: 1000
+    },
+    {
+      cost: 20000,
+      sqft: 2000
+    }
+  ];
 
   vm.getProperties = function(){
     console.log('getProperties:', $location.url());
