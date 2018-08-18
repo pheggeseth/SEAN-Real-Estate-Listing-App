@@ -25,10 +25,10 @@ app.config(function($routeProvider) {
   }).when('/listings/sale', {
     templateUrl: 'views/listings.html',
     controller: 'ListingsController as lc'
-  })//.otherwise({
-  //   templateUrl: 'views/home.html',
-  //   controller: 'HomeController as hc'
-  // });
+  }).otherwise({
+    templateUrl: 'views/home.html',
+    controller: 'HomeController as hc'
+  });
 });
 
 app.controller('HomeController', function($http) {
