@@ -15,7 +15,28 @@ console.log('JS');
 
 const app = angular.module('app', ['ngRoute']);
 
+app.config(function($routeProvider) {
+  $routeProvider.when('/', {
+    templateUrl: 'views/home.html',
+    controller: 'HomeController'
+  }).when('/rental', {
+    templateUrl: 'views/rental.html',
+    controller: 'PropertyController'
+  }).when('/sale', {
+    templateUrl: 'views/sale.html',
+    controller: 'PropertyController'
+  }).otherwise({
+    templateUrl: 'views/home.html',
+    controller: 'HomeController'
+  });
+});
+
 app.controller('HomeController', function($http) {
-  console.log('angularjs');
+  console.log('in HomeController');
+  
+});
+
+app.controller('PropertyController', function($http, $location) {
+  console.log('in PropertyController', $location.url());
   
 });
