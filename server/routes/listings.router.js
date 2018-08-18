@@ -39,23 +39,24 @@ router.get('/:type', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // get data with req.body
-  // for posting to MongoDB, use something like...
-  // const modelToAdd = new Model(req.body);
-  // modelToAdd.save()
-  //  .then(() => res.sendStatus(201))
-  //  .catch(error => res.sendStatus(500));
-
-  // POSTGRESQL SAMPLE POST
-  // const itemToAdd = req.body; // This the data we sent
-  //   console.log('In POST route - product:', itemToAdd); // Has a name, size and cost
-  //   const query = 'INSERT INTO "table" ("column1", "column2", "column3") VALUES ($1, $2, $3);';
-  //   pool.query(query, [itemToAdd.value1, itemToAdd.value2, itemToAdd.value3])
-  //     .then(() => res.sendStatus(201))
-  //     .catch(error => {
-  //       console.log('Error in POST:', error);
-  //       res.sendStatus(500);
-  //   });
+  const listingToAdd = req.body;
+  /*{
+    cost: int,
+    sqft: int,
+    type: string,
+    city: string,
+    image_path: string
+  }*/
+  console.log('In POST route - listing:', listingToAdd);
+  console.log('values:', Object.values(listingToAdd));
+  
+  const query = 'INSERT INTO "listings" ("cost", "sqft", "type", "city", "image_path") VALUES ($1, $2, $3, $4, $5);';
+  pool.query(query, [...Object.values(listingToAdd)])
+    .then(() => res.sendStatus(201))
+    .catch(error => {
+      console.log('Error in POST:', error);
+      res.sendStatus(500);
+  });
 });
 
 router.delete('/:id', (req, res) => {
