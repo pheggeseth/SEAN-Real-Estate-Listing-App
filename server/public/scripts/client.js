@@ -20,10 +20,10 @@ app.config(function($routeProvider) {
     templateUrl: 'views/home.html',
     controller: 'HomeController'
   }).when('/rental', {
-    templateUrl: 'views/rental.html',
+    templateUrl: 'views/properties.html',
     controller: 'PropertyController'
   }).when('/sale', {
-    templateUrl: 'views/sale.html',
+    templateUrl: 'views/properties.html',
     controller: 'PropertyController'
   }).otherwise({
     templateUrl: 'views/home.html',
