@@ -18,16 +18,16 @@ const app = angular.module('app', ['ngRoute']);
 app.config(function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'views/home.html',
-    controller: 'HomeController'
+    controller: 'HomeController as hc'
   }).when('/rental', {
     templateUrl: 'views/properties.html',
-    controller: 'PropertyController'
+    controller: 'PropertyController as pc'
   }).when('/sale', {
     templateUrl: 'views/properties.html',
-    controller: 'PropertyController'
+    controller: 'PropertyController as pc'
   }).otherwise({
     templateUrl: 'views/home.html',
-    controller: 'HomeController'
+    controller: 'HomeController as hc'
   });
 });
 
@@ -38,5 +38,14 @@ app.controller('HomeController', function($http) {
 
 app.controller('PropertyController', function($http, $location) {
   console.log('in PropertyController', $location.url());
-  
+  vm = this;
+
+  vm.properties = [];
+
+  vm.getProperties = function(){
+    console.log('getProperties:', $location.url());
+    
+  }
+
+  vm.getProperties();
 });
