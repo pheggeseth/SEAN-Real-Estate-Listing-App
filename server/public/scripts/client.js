@@ -36,7 +36,7 @@ app.controller('HomeController', function($http) {
   
 });
 
-app.controller('PropertyController', function($http) {
-  console.log('in PropertyController');
+app.controller('PropertyController', function($http, $location) {
+  console.log('in PropertyController', $location.url());
   
 });
