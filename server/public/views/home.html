@@ -1,1 +1,9 @@
-home
+<form ng-submit="hc.addToListings()">
+  <input type="text" ng-model="hc.newListing.city" placeholder="City" /><br>
+  <label>Rent <input type="radio" ng-model="hc.newListing.type" value="rent" /></label>
+  <label>Sale <input type="radio" ng-model="hc.newListing.type" value="sale" /></label><br>
+  <input type="number" ng-model="hc.newListing.cost" placeholder="Cost" min="100" step="100" /><br>
+  <input type="number" ng-model="hc.newListing.sqft" placeholder="Sqft" min="100" step="100" /><br>
+  <input type="text" ng-model="hc.newListing.image_path" placeholder="Image Path" />
+  <button>Submit</button>
+</form>

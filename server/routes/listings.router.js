@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
   console.log('values:', Object.values(listingToAdd));
   
   const query = 'INSERT INTO "listings" ("cost", "sqft", "type", "city", "image_path") VALUES ($1, $2, $3, $4, $5);';
-  pool.query(query, [...Object.values(listingToAdd)])
+  pool.query(query, [listingToAdd.cost, listingToAdd.sqft, listingToAdd.type, listingToAdd.city, listingToAdd.image_path])
     .then(() => res.sendStatus(201))
     .catch(error => {
       console.log('Error in POST:', error);

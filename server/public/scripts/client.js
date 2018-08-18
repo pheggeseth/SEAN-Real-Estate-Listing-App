@@ -33,7 +33,25 @@ app.config(function($routeProvider) {
 
 app.controller('HomeController', function($http) {
   console.log('in HomeController');
-  
+  vm = this;
+  vm.newListing = {
+    cost: '',
+    sqft: '',
+    type: 'rent',
+    city: '',
+    image_path: ''
+  };
+  vm.addToListings = function() {
+    console.log('addToListings:', vm.newListing);
+    $http({
+      method: 'POST',
+      url: '/listings',
+      data: vm.newListing
+    }).then(response => {
+      console.log('/listings POST success:', response);
+
+    }).catch(error => console.log('/listings POST error:', error));
+  };
 });
 
 app.controller('ListingsController', function($http, $location) {
@@ -58,7 +76,7 @@ app.controller('ListingsController', function($http, $location) {
       method: 'GET',
       url: url
     }).then(response => {
-      console.log('getListings success:', response.data);
+      console.log('getListings success');
       vm.listings = response.data;
     }).catch(error => console.log('getListings error:', error));
   }
