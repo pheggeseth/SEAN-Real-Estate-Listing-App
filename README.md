@@ -30,9 +30,9 @@ Include one or two screen shots of your project here (optional). Remove if unuse
 
 ### Next Steps
 
-- [ ] create angular app
-- [ ] two views, one for sale, one for rent
-  - [ ] nav links to switch between them
+- [x] create angular app
+  - [ ] create routes
+- [ ] nav links to switch between them
 - [ ] three views/controllers
   - [ ] Home view, allow user to add property
     - [ ] create add property form
