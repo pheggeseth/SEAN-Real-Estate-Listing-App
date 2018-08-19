@@ -88,6 +88,10 @@ app.controller('ListingsController', function($http, $location) {
     .catch(error => console.log('/listings DELETE error:', error));
   };
 
+  vm.search = function(term) {
+    console.log('search:', term);
+  }
+
   function getListings(){
     //console.log('in getListings:', url);
     $http({

@@ -103,6 +103,12 @@ button:focus {
   height: 40px;
   width: 150px;
 }
+.listings-search {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .cards-container {
   margin: 10px;
   display: grid;
@@ -150,7 +156,7 @@ img {
   font-size: 0.8em;
   font-style: italic;
 }
-.listing-delete {
+.listing-btn {
   height: 30px;
   width: 75px;
 }

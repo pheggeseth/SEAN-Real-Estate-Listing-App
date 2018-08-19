@@ -1,3 +1,17 @@
+<form class="listings-search" ng-submit="lc.search(lc.searchTerm)">
+  Search by:
+  <select class="form-select-image" ng-model="lc.searchTerm.term" ng-init="lc.searchTerm.term = 'city'">
+    <option value="city">City</option>
+    <option value="minCost">Min Price</option>
+    <option value="maxCost">Max Price</option>
+    <option value="sqft">Square Feet</option>
+  </select>
+  <input ng-if="lc.searchTerm.term === 'city'" type="text" ng-model="lc.searchTerm.value" ng-init="lc.searchTerm.value = ''" placeholder="City Name" />
+  <input type="number" class="form-cost" ng-if="lc.searchTerm.term === 'minCost'" ng-model="lc.searchTerm.value" ng-init="lc.searchTerm.value = ''" min="100" step="100" />
+  <input type="number" class="form-cost" ng-if="lc.searchTerm.term === 'maxCost'" ng-model="lc.searchTerm.value" ng-init="lc.searchTerm.value = ''" min="100" step="100" />
+  <input type="number" class="form-sqft" ng-if="lc.searchTerm.term === 'sqft'" ng-model="lc.searchTerm.value" ng-init="lc.searchTerm.value = ''" min="100" step="100" />
+  <button class="listing-btn">Search</button>
+</form>
 <div class="cards-container">
   <div class="card" ng-repeat="listing in lc.listings">
       <img ng-src="/images/{{listing.image_path}}" alt="">
@@ -7,7 +21,7 @@
           <span class="listing-cost">{{listing.cost | currency:"$":0}} </span>
           <span class="listing-sqft">{{listing.sqft}} sqft</span>
         </div>
-        <button class="listing-delete" ng-click="lc.deleteListing(listing.id)">Delete</button>
+        <button class="listing-btn" ng-click="lc.deleteListing(listing.id)">Delete</button>
       </div>
     </div>
 </div>
