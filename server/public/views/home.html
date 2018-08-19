@@ -1,10 +1,10 @@
 <h2>Add a new listing</h2>
 <form id="listing-form" ng-submit="hc.addToListings()">
-  <input type="text" ng-model="hc.newListing.city" placeholder="City" /><br />
+  <input type="text" class="form-city" ng-model="hc.newListing.city" placeholder="City" /><br />
   <label>Rent <input type="radio" ng-model="hc.newListing.type" value="rent" /></label>
   <label>Sale <input type="radio" ng-model="hc.newListing.type" value="sale" /></label><br />
   <input type="number" class="form-cost" ng-model="hc.newListing.cost" placeholder="Cost" min="100" step="100" />
   <input type="number" class="form-sqft" ng-model="hc.newListing.sqft" placeholder="Sqft" min="100" step="100" /><br />
-  <input type="text" ng-model="hc.newListing.image_path" placeholder="Image Path" /><br />
+  <select class="form-select-image" ng-model="hc.newListing.image_path" ng-options="image.path as image.name for image in hc.images"></select>
   <button class="listing-submit">SUBMIT</button>
 </form>

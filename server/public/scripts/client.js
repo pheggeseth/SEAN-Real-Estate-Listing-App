@@ -34,6 +34,16 @@ app.config(function($routeProvider) {
 app.controller('HomeController', function($http) {
   console.log('in HomeController');
   vm = this;
+  vm.images= [
+    {name: 'Select Image', path: ''},
+    {name: 'Classic Flats', path: 'classic-flats.jpg'},
+    {name: 'Haunted', path: 'haunted.png'},
+    {name: 'Older', path: 'older.jpg'},
+    {name: 'Rental', path: 'rental.jpg'},
+    {name: 'Rental 2', path: 'rental2.jpg'},
+    {name: 'Shiny', path: 'shiny.jpg'},
+    {name: 'Stoney', path: 'stoney.jpg'}
+  ];
   vm.newListing = {
     cost: '',
     sqft: '',
@@ -43,6 +53,11 @@ app.controller('HomeController', function($http) {
   };
   vm.addToListings = function() {
     console.log('addToListings:', vm.newListing);
+    if(!Object.values(vm.newListing).every(value => value)) {
+      console.log('must fill all form fields');
+      return;
+    }
+
     $http({
       method: 'POST',
       url: '/listings',
