@@ -33,10 +33,10 @@ Include one or two screen shots of your project here (optional). Remove if unuse
 - [x] create angular app
   - [x] create routes
 - [x] nav links to switch between them
-- [ ] three views/controllers
-  - [ ] Home view, allow user to add property
-    - [ ] create add property form
-      - [ ] radio button for sale/rental
+- [x] three views/controllers
+  - [x] Home view, allow user to add property
+    - [x] create add property form
+      - [x] radio button for sale/rental
       - [ ] select for image names
   - [x] Rental/Sale views
     - [x] display listings as "cards" with information on them

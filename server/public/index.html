@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />
   <script src="./vendors/angular.min.js"></script>
   <script src="./vendors/angular-route.min.js"></script>
@@ -12,10 +13,11 @@
 </head>
 <body ng-app="app">
   <div class="container">
+    <h1>REAL ESTATE LISTINGS</h1>
     <div class="navbar">
-      <a href="/">Home</a>
-      <a href="#!/listings/rent">For Rent</a>
-      <a href="#!/listings/sale">For Sale</a>
+      <a href="/"><button>HOME</button></a>
+      <a href="#!/listings/rent"><button>FOR RENT</button></a>
+      <a href="#!/listings/sale"><button>FOR SALE</button></a>
     </div>
     <div>
       <ng-view></ng-view>
