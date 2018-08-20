@@ -27,7 +27,7 @@ pool.on('connect', () => console.log('postgresql connected!!!'));
 pool.on('error', error => console.log('Error connecting to db', error));
 
 
-// get route params with "/route/:paramName, then reference it as req.params.paramName"
+// GET ALL OF EITHER RENT OR SALE
 router.get('/:type', (req, res) => {
   const query = `SELECT * FROM "listings" WHERE "type" = $1;`;
   pool.query(query, [req.params.type])
@@ -38,6 +38,7 @@ router.get('/:type', (req, res) => {
     });
 });
 
+// SEARCH CITY FOR PARTIAL NAME
 router.get('/:type/search/city/:value', (req, res) => {
   const type = req.params.type;
   const value = `%${req.params.value}%`;
@@ -50,62 +51,36 @@ router.get('/:type/search/city/:value', (req, res) => {
     });
 });
 
-router.get('/:type/search/cost', (req, res) => {
+// SEARCH EITHER COST OR SQFT WITH MIN AND/OR MAX
+router.get('/:type/search/:category', (req, res) => {
   const type = req.params.type;
+  const category = req.params.category;
   const terms = req.query;
-  let query;
-  if (type === 'rent') {
-    query = `SELECT * FROM "listings" WHERE "type" = 'rent' AND "cost" `;
-  } else if (type === 'sale') {
-    query = `SELECT * FROM "listings" WHERE "type" = 'sale' AND "cost" `;
+  
+  let queryText;
+  if (category === 'cost' || category === 'sqft') {
+    queryText = `SELECT * FROM "listings" WHERE "type" = $1 AND "${category}" `;
+    if (terms.min && terms.max) {
+      queryText += `>= $2 AND "${category}" <= $3;`;
+    } else if (terms.min && !terms.max) {
+      queryText += `>= $2;`;
+    } else if (!terms.min && terms.max) {
+      queryText += `<= $2;`;
+    }
   }
-  if (terms.min && terms.max) {
-    query += `>= $1 AND "cost" <= $2;`;
-    pool.query(query, [terms.min, terms.max])
-      .then(response => res.send(response.rows))
-      .catch(error => {
-        console.log('listings search error:', error);
-        res.sendStatus(500);
-      });
-  } else {
-    query += `${terms.min ? '>=' : '<='} $1;`;
-    pool.query(query, [terms.min || terms.max])
-      .then(response => res.send(response.rows))
-      .catch(error => {
-        console.log('listings search error:', error);
-        res.sendStatus(500);
-      });
-  }
+  
+  let queryValues = [type, terms.min, terms.max];
+  queryValues = queryValues.filter(value => value); // filter out either min or max if they are undefined
+  
+  pool.query(queryText, queryValues)
+    .then(response => res.send(response.rows))
+    .catch(error => {
+      console.log('listings search error:', error);
+      res.sendStatus(500);
+    });
 });
 
-router.get('/:type/search/sqft', (req, res) => {
-  const type = req.params.type;
-  const terms = req.query;
-  let query;
-  if (type === 'rent') {
-    query = `SELECT * FROM "listings" WHERE "type" = 'rent' AND "sqft" `;
-  } else if (type === 'sale') {
-    query = `SELECT * FROM "listings" WHERE "type" = 'sale' AND "sqft" `;
-  }
-  if (terms.min && terms.max) {
-    query += `>= $1 AND "cost" <= $2;`;
-    pool.query(query, [terms.min, terms.max])
-      .then(response => res.send(response.rows))
-      .catch(error => {
-        console.log('listings search error:', error);
-        res.sendStatus(500);
-      });
-  } else {
-    query += `${terms.min ? '>=' : '<='} $1;`;
-    pool.query(query, [terms.min || terms.max])
-      .then(response => res.send(response.rows))
-      .catch(error => {
-        console.log('listings search error:', error);
-        res.sendStatus(500);
-      });
-  }
-});
-
+// ADD NEW LISTING TO DB
 router.post('/', (req, res) => {
   const listingToAdd = req.body;
   /*{

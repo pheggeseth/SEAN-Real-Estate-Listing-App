@@ -68,6 +68,10 @@ input[type="text"], input[type="number"], select {
   height: 34px;
   width: 182px;
 }
+.form-select-search {
+  height: 34px;
+  width: 120px;
+}
 .form-cost {
   width: 100px;
 }
