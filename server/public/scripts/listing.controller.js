@@ -1,6 +1,7 @@
 app.controller('ListingsController', function($http, $location) {
-  const pageURL = $location.url(); // url is always '/listings/rent' or '/listings/sale'
   vm = this;
+
+  vm.pageURL = $location.url(); // url is always '/listings/rent' or '/listings/sale'
 
   vm.listings = [];
 
@@ -28,7 +29,7 @@ app.controller('ListingsController', function($http, $location) {
 
     $http({
       method: 'GET',
-      url: pageURL + searchPath
+      url: vm.pageURL + searchPath
     }).then(function(response) {
       console.log('search response:', response.data);
       vm.listings = response.data;
@@ -61,7 +62,7 @@ app.controller('ListingsController', function($http, $location) {
   function getListings(){
     $http({
       method: 'GET',
-      url: pageURL
+      url: vm.pageURL
     }).then(response => {
       vm.listings = response.data;
     }).catch(error => console.log('getListings error:', error));

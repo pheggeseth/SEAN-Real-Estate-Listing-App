@@ -1,3 +1,5 @@
+<h2>Listings <span ng-if="lc.pageURL.includes('rent')">For Rent</span><span ng-if="lc.pageURL.includes('sale')">For Sale</span></h2>
+
 <form class="listings-search" ng-submit="lc.searchListings(lc.searchTerm)">
   Search by:
   <!-- select chooses which of the following inputs appear -->
