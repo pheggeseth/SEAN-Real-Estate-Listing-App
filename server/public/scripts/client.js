@@ -70,8 +70,8 @@ app.controller('HomeController', function($http) {
 });
 
 app.controller('ListingsController', function($http, $location) {
-  const url = $location.url(); // url is always '/listings/rent' or '/listings/sale'
-  //console.log('in ListingsController', url);
+  const pageURL = $location.url(); // url is always '/listings/rent' or '/listings/sale'
+  console.log('in ListingsController', pageURL);
   vm = this;
 
   vm.listings = [];
@@ -88,15 +88,51 @@ app.controller('ListingsController', function($http, $location) {
     .catch(error => console.log('/listings DELETE error:', error));
   };
 
-  vm.search = function(term) {
-    console.log('search:', term);
+  vm.searchListings = function(search) {
+    if (search.term === 'city' && !search.value) {
+      getListings();
+      return;
+    } else if ((search.term === 'cost' || search.term === 'sqft') && (!search.min && !search.max)) {
+      getListings();
+      return;
+    }
+
+    console.log('search:', search);
+    let searchPath = '/search';
+
+    // complete search path based on what is inside search object
+    // for city -> '/search/city/:partialName'
+    // for cost or sqft -> '/search/cost?min=[INT]&max=[INT]'
+    if (search.term === 'city') {
+      searchPath += '/city/' + search.value;
+    } else if (search.term === 'cost' || search.term === 'sqft') {
+      searchPath += `/${search.term}?`;
+      if (search.min && !search.max) {
+        searchPath += 'min=' + search.min;
+      } else if (!search.min && search.max) {
+        searchPath += 'max=' + search.max;
+      } else if (search.min && search.max) {
+        searchPath += `min=${search.min}&max=${search.max}`;
+      } 
+    }
+
+    console.log('search path:', searchPath);
+    $http({
+      method: 'GET',
+      url: pageURL + searchPath
+    }).then(function(response) {
+      console.log('search response:', response.data);
+      vm.listings = response.data;
+    }).catch(function(error) {
+      console.log('/listings search error:', error);
+    })
   }
 
   function getListings(){
     //console.log('in getListings:', url);
     $http({
       method: 'GET',
-      url: url
+      url: pageURL
     }).then(response => {
       //console.log('getListings success');
       vm.listings = response.data;

@@ -38,6 +38,74 @@ router.get('/:type', (req, res) => {
     });
 });
 
+router.get('/:type/search/city/:value', (req, res) => {
+  const type = req.params.type;
+  const value = `%${req.params.value}%`;
+  const query = `SELECT * FROM "listings" WHERE "type" = $1 AND "city" ILIKE $2;`;
+  pool.query(query, [type, value])
+    .then(response => res.send(response.rows))
+    .catch(error => {
+      console.log('listings search error:', error);
+      res.sendStatus(500);
+    });
+});
+
+router.get('/:type/search/cost', (req, res) => {
+  const type = req.params.type;
+  const terms = req.query;
+  let query;
+  if (type === 'rent') {
+    query = `SELECT * FROM "listings" WHERE "type" = 'rent' AND "cost" `;
+  } else if (type === 'sale') {
+    query = `SELECT * FROM "listings" WHERE "type" = 'sale' AND "cost" `;
+  }
+  if (terms.min && terms.max) {
+    query += `>= $1 AND "cost" <= $2;`;
+    pool.query(query, [terms.min, terms.max])
+      .then(response => res.send(response.rows))
+      .catch(error => {
+        console.log('listings search error:', error);
+        res.sendStatus(500);
+      });
+  } else {
+    query += `${terms.min ? '>=' : '<='} $1;`;
+    pool.query(query, [terms.min || terms.max])
+      .then(response => res.send(response.rows))
+      .catch(error => {
+        console.log('listings search error:', error);
+        res.sendStatus(500);
+      });
+  }
+});
+
+router.get('/:type/search/sqft', (req, res) => {
+  const type = req.params.type;
+  const terms = req.query;
+  let query;
+  if (type === 'rent') {
+    query = `SELECT * FROM "listings" WHERE "type" = 'rent' AND "sqft" `;
+  } else if (type === 'sale') {
+    query = `SELECT * FROM "listings" WHERE "type" = 'sale' AND "sqft" `;
+  }
+  if (terms.min && terms.max) {
+    query += `>= $1 AND "cost" <= $2;`;
+    pool.query(query, [terms.min, terms.max])
+      .then(response => res.send(response.rows))
+      .catch(error => {
+        console.log('listings search error:', error);
+        res.sendStatus(500);
+      });
+  } else {
+    query += `${terms.min ? '>=' : '<='} $1;`;
+    pool.query(query, [terms.min || terms.max])
+      .then(response => res.send(response.rows))
+      .catch(error => {
+        console.log('listings search error:', error);
+        res.sendStatus(500);
+      });
+  }
+});
+
 router.post('/', (req, res) => {
   const listingToAdd = req.body;
   /*{
