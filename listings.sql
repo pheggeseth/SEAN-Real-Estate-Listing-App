@@ -1,3 +1,14 @@
+-- POSTGRESQL SETUP
+-- Database: "real_estate"
+CREATE TABLE "listings" (
+  "id" serial primary key,
+  "cost" int,
+  "sqft" int,
+  "type" varchar(20),
+  "city" varchar(20),
+  "image_path" varchar(20)
+);
+
 INSERT INTO "listings" ("cost", "sqft", "type", "city", "image_path")
 VALUES (123000, 1500, 'sale', 'Forest Lake', 'shiny.jpg'),
 (90000, 1200, 'sale', 'Blaine', 'stony.jpg'),

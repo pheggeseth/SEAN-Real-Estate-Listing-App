@@ -1,17 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// POSTGRESQL SETUP
-// Database: "real_estate"
-// CREATE TABLE "listings" (
-// 	"id" serial primary key,
-// 	"cost" int,
-// 	"sqft" int,
-// 	"type" varchar(20),
-// 	"city" varchar(20),
-// 	"image_path" varchar(20)
-// );
-
 const pg = require('pg');
 const Pool = pg.Pool;
 const config = {
