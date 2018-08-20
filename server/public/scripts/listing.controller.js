@@ -1,4 +1,4 @@
-app.controller('ListingsController', function($http, $location) {
+app.controller('ListingsController', ['$http', '$location', function($http, $location) {
   vm = this;
 
   vm.pageURL = $location.url(); // url is always '/listings/rent' or '/listings/sale'
@@ -69,4 +69,4 @@ app.controller('ListingsController', function($http, $location) {
   }; // end getListings
 
   getListings(); // get all listings on page load
-}); // end ListingsController
+}]); // end ListingsController

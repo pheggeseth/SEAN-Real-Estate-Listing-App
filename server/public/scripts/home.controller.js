@@ -9,7 +9,7 @@ const images = [ // objects to use in add listing form image select
   {name: 'Stoney', path: 'stoney.jpg'}
 ];
 
-app.controller('HomeController', function($http) {
+app.controller('HomeController', ['$http', function($http) {
   //console.log('in HomeController');
   vm = this;
 
@@ -44,4 +44,4 @@ app.controller('HomeController', function($http) {
       };
     }).catch(error => console.log('/listings POST error:', error));
   }; // end addToListings
-}); // end HomeController
+}]); // end HomeController
