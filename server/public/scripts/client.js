@@ -11,7 +11,7 @@ in separate terminal window, start database
 > mongod for MongoDB
 > brew services start postgresql for PostgreSQL
 */
-console.log('JS');
+//console.log('JS');
 
 const app = angular.module('app', ['ngRoute']);
 
@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
 });
 
 app.controller('HomeController', function($http) {
-  console.log('in HomeController');
+  //console.log('in HomeController');
   vm = this;
   vm.images= [
     {name: 'Select Image', path: ''},
@@ -52,7 +52,7 @@ app.controller('HomeController', function($http) {
     image_path: ''
   };
   vm.addToListings = function() {
-    console.log('addToListings:', vm.newListing);
+    //console.log('addToListings:', vm.newListing);
     if(!Object.values(vm.newListing).every(value => value)) {
       console.log('must fill all form fields');
       return;
@@ -64,7 +64,13 @@ app.controller('HomeController', function($http) {
       data: vm.newListing
     }).then(response => {
       console.log('/listings POST success:', response);
-
+      vm.newListing = {
+        cost: '',
+        sqft: '',
+        type: 'rent',
+        city: '',
+        image_path: ''
+      };
     }).catch(error => console.log('/listings POST error:', error));
   };
 });
