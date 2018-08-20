@@ -1,5 +1,6 @@
 <form class="listings-search" ng-submit="lc.searchListings(lc.searchTerm)">
   Search by:
+  <!-- select chooses which of the following inputs appear -->
   <select class="form-select-search" ng-model="lc.searchTerm.term" ng-init="lc.searchTerm.term = 'city'">
     <option value="city">City</option>
     <option value="cost">Price</option>
